@@ -1,0 +1,25 @@
+
+<md-button ui-sref="login">
+  Log In
+</md-button>
+
+
+  <h1 class="loginHeader">Register</h1>
+    <form ng-submit="authCtrl.register()" >
+       <md-input-container>
+         <label >Email</label>
+         <input type="email" ng-model="authCtrl.user.email">
+       </md-input-container>
+
+       <md-input-container >
+         <label >Password</label>
+         <input type="password" ng-model="authCtrl.user.password">
+       </md-input-container>
+
+       <md-button type="submit" >
+         register
+       </md-button>
+     </form>
+   </md-content>
+
+</div>

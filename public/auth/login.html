@@ -1,0 +1,30 @@
+<md-button ui-sref="register">
+  register
+</md-button>
+
+  <h1 class="loginHeader">Sign In</h1>
+  <div class="LoginExternalAuthSignInDiv">
+    <md-button class="loginExternalAuthButton" ng-click="authCtrl.loginWithFacebook()" class="fa">&#xf09a;</i>
+    </md-button>
+    <md-button class="loginExternalAuthButton" ng-click="authCtrl.loginWithGoogle()">
+      <i style="font-size:24px" class="fa">&#xf1a0;</i>
+    </md-button>
+    <md-button class="loginExternalAuthButton" ng-click="authCtrl.loginWithTwitter()">
+      <i style="font-size:24px" class="fa">&#xf099;</i>
+    </md-button>
+  </div>
+  <form ng-submit="authCtrl.login()"  layout-gt-sm="column" >
+     <md-input-container style="width: 515px;">
+       <label >Email</label>
+       <input type="email" ng-model="authCtrl.user.email">
+     </md-input-container>
+
+     <md-input-container >
+       <label >Password</label>
+       <input type="password" ng-model="authCtrl.user.password">
+     </md-input-container>
+
+     <md-button type="submit" >
+       Login
+     </md-button>
+    </form>
