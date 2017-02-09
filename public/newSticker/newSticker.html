@@ -1,0 +1,24 @@
+<md-button ui-sref="homepage">
+  homepage
+</md-button>
+<br />
+
+new sticker
+<br />
+
+<input type="text" ng-model="newstickerCtrl.stickerIDNumber" />
+
+<!--
+{{newstickerCtrl.stickerIDNumber}}
+<br />
+{{newstickerCtrl.lat}}
+<br />
+{{newstickerCtrl.lng}}
+-->
+
+<button ng-click="newstickerCtrl.initSticker()" >upload to firebase</button>
+things
+{{newstickerCtrl.lat}}
+<br />
+{{newstickerCtrl.stickers}}
+{{newstickerCtrl.stickerIDNumber.length}}

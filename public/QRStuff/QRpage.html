@@ -1,0 +1,33 @@
+<md-button ui-sref="homepage">
+  homepage
+</md-button>
+
+
+<div id="main">
+
+<div id="mainbody">
+
+<tr>
+  <td style="display: none;"><img class="selector" id="webcamimg" src="vid.png" onclick="setwebcam()" align="left" style="opacity: 1;"></td>
+  <td style="display: none;"><img class="selector" id="qrimg" src="cam.png" onclick="setimg()" align="right" style="opacity: 0.2;"></td></tr>
+  <tr><td colspan="2" align="center">
+  <div id="outdiv"><video id="v" autoplay="" ></video>
+  </div></td>
+</tr>
+
+
+</div>&nbsp;
+
+</div>
+<canvas id="qr-canvas" width="800" height="600"></canvas>
+
+
+<div id="result"></div>
+<input id="resultInput" value="null" />
+
+<button ng-click="qrstuffCtrl.playCoinSound()">Coins!</button>
+<!--
+<audio id="audoggmpeg" controls>
+  <source src="../sounds/coin-drop-4.mp3" type="audio/ogg">
+  <source src="../sounds/coin-drop-4.mp3" type="audio/mpeg">
+</audio>

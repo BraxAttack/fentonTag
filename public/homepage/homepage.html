@@ -8,7 +8,7 @@
        <div class="homepageProfileEmail">{{ homepageCtrl.userProfile.email }}</div>
 
 
-       <md-button md-ink-ripple layout="row" md-ink-ripple layout="row" layout-align="start center" style="width: 100%; padding: 0px; margin: 0;" ng-click="homepageCtrl.logout()">
+       <md-button md-ink-ripple layout="row" md-ink-ripple layout="row" layout-align="start center" ng-click="homepageCtrl.logout()">
          <div class="inset" style="line-height: 0px;">
           <i class="material-icons">lock_outline</i>
          </div>
@@ -20,13 +20,20 @@
 
 
 
-  <div class="homepageTopBar">
-    <i class="homepageCurrentPageIcon material-icons" ng-if="homepageCtrl.currentPage.pageVar == 'Projects'">dashboard</i>
-    <i class="homepageCurrentPageIcon material-icons" ng-if="homepageCtrl.currentPage.pageVar == 'Templates'">invert_colors</i>
-    <i class="homepageCurrentPageIcon material-icons" ng-if="homepageCtrl.currentPage.pageVar == 'Playlists'">menu</i>
-    <h1 class="homepageCurrentPage">{{homepageCtrl.currentPage.pageVar}}</h1>
-  </div>
+  <h1 class="homepageCurrentPage">{{homepageCtrl.currentPage.pageVar}}</h1>
 
+  <md-button ui-sref="profile">
+    profile
+  </md-button>
+  <md-button ui-sref="newsession">
+    newSession
+  </md-button>
+  <md-button ui-sref="newsticker">
+    newSticker
+  </md-button>
+  <md-button ui-sref="QRreader">
+    QRreader
+  </md-button>
 
   <ui-view></ui-view>
 

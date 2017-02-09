@@ -72,10 +72,44 @@ angular
         }
 
       })
-      .state('homepage.newproject', {
-        url: '/newproject',
-        templateUrl: 'homepage/newProject.html',
-        controller: 'ProjectsCtrl as projectsCtrl',
+      .state('newsession', {
+        url: '/newsession',
+        templateUrl: 'newSession/newSession.html',
+        controller: 'NewSessionCtrl as newsessionCtrl',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireSignIn().catch(function(){
+              $state.go('login');
+            });
+          },
+          profile: function(Users, Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded();
+            });
+          }
+        }
+      })
+      .state('newsticker', {
+        url: '/newsticker',
+        templateUrl: 'newSticker/newSticker.html',
+        controller: 'NewStickerCtrl as newstickerCtrl',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireSignIn().catch(function(){
+              $state.go('login');
+            });
+          },
+          profile: function(Users, Auth){
+            return Auth.$requireSignIn().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded();
+            });
+          }
+        }
+      })
+      .state('QRreader', {
+        url: '/qrreader',
+        templateUrl: 'QRStuff/QRpage.html',
+        controller: 'QRStuffCtrl as qrstuffCtrl',
         resolve: {
           auth: function($state, Users, Auth){
             return Auth.$requireSignIn().catch(function(){

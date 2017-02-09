@@ -1,0 +1,38 @@
+
+<md-button ui-sref="homepage">
+  homepage
+</md-button>
+
+<br />
+New Session
+
+
+
+<form ng-submit="projectsCtrl.createProject()">
+
+<md-input-container style="margin-right: 10px;">
+  <label>Game Type</label></label>
+  <md-select ng-model="newsessionCtrl.gameType">
+    <md-option ng-repeat="game in newsessionCtrl.GameTypes" value="{{game}}">{{game}}</md-option>
+  </md-select>
+</md-input-container>
+<br />
+
+<md-button class="md-raised md-primary" ng-click="newsessionCtrl.gameDurr = 15">15 min</md-button>
+<md-button class="md-raised md-primary" ng-click="newsessionCtrl.gameDurr = 25">25 min</md-button>
+<md-button class="md-raised md-primary" ng-click="newsessionCtrl.gameDurr = 45">45 min</md-button>
+<md-button class="md-raised md-primary" ng-click="newsessionCtrl.gameDurr = 60">60 min</md-button>
+{{newsessionCtrl.gameDurr}}
+<br />
+
+<md-button class="md-raised md-primary" ng-click="newsessionCtrl.getLocation()">get coords</md-button>
+<br />
+
+<h3>My Google Maps Demo</h3>
+<div id="map" style="height: 500px; width: 500px;"></div>
+
+
+<md-button  type="submit" class="md-raised">
+  Create Project
+</md-button>
+</form>
