@@ -35,8 +35,8 @@ angular.module('fentonTagApp')
       console.log("start");
       qrstuffCtrl.intervalPromise = $interval(qrstuffCtrl.checkInputVar , 250);
 
-    };
 
+    };
 
     qrstuffCtrl.cancelInputVar = function () {
       $interval.cancel(qrstuffCtrl.intervalPromise);
@@ -45,6 +45,20 @@ angular.module('fentonTagApp')
     qrstuffCtrl.checkInputVar = function () {
 
         var inputVal = angular.element('#resultInput').val();
+        var goBack = angular.element('#goBack').val();
+
+        if(goBack != "null"){
+            qrstuffCtrl.cancelInputVar();
+            //stops the qr reader from firing the entire time
+            setimg();
+            if(qrstuffCtrl.currentPage.lastPage) {
+              console.log("got it");
+              $state.go("homepage");
+            }else{
+              $state.go(qrstuffCtrl.currentPage.lastPage);
+            }
+
+        }
 
         if(inputVal != "null") {
           //lets user know it was taken
@@ -54,7 +68,7 @@ angular.module('fentonTagApp')
           //stops the qr reader from firing the entire time
           setimg();
 
-          if(qrstuffCtrl.currentPage.lastPage == "sticker"){
+          if(qrstuffCtrl.currentPage.lastPage == "newsticker"){
 
             //console.log(inputVal);
             qrstuffCtrl.result = inputVal;
@@ -70,10 +84,12 @@ angular.module('fentonTagApp')
               lng: qrstuffCtrl.currentPage.lng
             };
             updates['/Stickers/' + qrstuffCtrl.result ] = qrstuffCtrl.stickerData;
+
             firebase.database().ref().update(updates);
 
-            alert("ticket Logged");
+            console.log("put in a thing to verify success");
             $state.go('homepage');
+
           }else{
             alert("error has occured, try again");
             $state.go('homepage');
@@ -82,6 +98,7 @@ angular.module('fentonTagApp')
 
         }
       }
+
 
       //qrstuffCtrl.StartCheckInputVar();
       qrstuffCtrl.initQRpage();

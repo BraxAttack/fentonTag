@@ -19,7 +19,7 @@ angular.module('fentonTagApp')
           }, 200);
       }else{
           console.log("got it");
-          newstickerCtrl.currentPage.lastPage = "sticker";
+          newstickerCtrl.currentPage.lastPage = "newsticker";
           $state.go('QRreader');
       }
 

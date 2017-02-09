@@ -71,6 +71,10 @@ function htmlEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+function goBack() {
+	document.getElementById("goBack").value = "goBack";
+}
+
 function read(a)
 {
     var html="";
@@ -79,6 +83,8 @@ function read(a)
     html+= htmlEntities(a);
     document.getElementById("result").innerHTML=html;
     document.getElementById("resultInput").value = html;
+
+
 }
 
 function isCanvasSupported(){
