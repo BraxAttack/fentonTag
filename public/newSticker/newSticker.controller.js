@@ -1,11 +1,14 @@
+
 angular.module('fentonTagApp')
-  .controller('NewStickerCtrl', function($state, $window, $timeout, Auth, Users, profile, currentPage, Stickers){
+  .controller('NewStickerCtrl', function($state, $window, $interval, $timeout, Auth, Users, profile, currentPage, Stickers){
     var newstickerCtrl = this;
 
     newstickerCtrl.profile = profile;
     newstickerCtrl.stickers = Stickers;
+    newstickerCtrl.currentPage = currentPage;
 
     newstickerCtrl.stickerIDNumber = "";
+
 
 
 
@@ -54,12 +57,17 @@ angular.module('fentonTagApp')
           firebase.database().ref().update(updates);
 
           newstickerCtrl.stickerIDNumber = "";
-          //alert("tag logged")
+          newstickerCtrl.stickerData = "";
+
+
+
+          alert("tag logged")
           $timeout(function () {
               $window.location.reload();
           }, 10);
+          alert("tag logged")
 
-          $state.go('homepage');
+          //$state.go('homepage');
 
         }
 

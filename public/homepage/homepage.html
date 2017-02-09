@@ -1,42 +1,36 @@
 
-         <img class="homepageProfilePic" src="{{ homepageCtrl.userProfile.photoURL }}" ng-if="homepageCtrl.userProfile.photoURL"/>
+         <!--<img class="homepageProfilePic" src="{{ homepageCtrl.userProfile.photoURL }}" ng-if="homepageCtrl.userProfile.photoURL"/>
          <div class="homepageProfilePicNoPic" ng-if="!homepageCtrl.userProfile.photoURL">
             <i class="material-icons" style="width: 89px; height: 89px; text-align: center; line-height: 95px; font-size: 35px;">sync</i>
          </div>
+-->
 
-       <div class="homepageProfileDisplayName">{{ homepageCtrl.profile.displayName }}</div>
-       <div class="homepageProfileEmail">{{ homepageCtrl.userProfile.email }}</div>
+   <div class="homepageProfileDisplayName">{{ homepageCtrl.profile.displayName }}</div>
+   <div class="homepageProfileEmail">{{ homepageCtrl.userProfile.email }}</div>
 
 
-       <md-button md-ink-ripple layout="row" md-ink-ripple layout="row" layout-align="start center" ng-click="homepageCtrl.logout()">
-         <div class="inset" style="line-height: 0px;">
-          <i class="material-icons">lock_outline</i>
-         </div>
-         <div class="inset">
-           LOGOUT
-         </div>
-       </md-button>
+   <button ink-ripple layout="row" ink-ripple layout="row" layout-align="start center" ng-click="homepageCtrl.logout()">
+
+     <div class="inset">
+       LOGOUT
+     </div>
+   </button>
 
 
 
 
   <h1 class="homepageCurrentPage">{{homepageCtrl.currentPage.pageVar}}</h1>
+  {{homepageCtrl.currentPage.lastPage}}
 
-  <md-button ui-sref="profile">
+  <button ui-sref="profile">
     profile
-  </md-button>
-  <md-button ui-sref="newsession">
+  </button>
+  <button ui-sref="newsession">
     newSession
-  </md-button>
-  <md-button ui-sref="newsticker">
+  </button>
+  <button ui-sref="newsticker">
     newSticker
-  </md-button>
-  <md-button ui-sref="QRreader">
+  </button>
+  <button ui-sref="QRreader">
     QRreader
-  </md-button>
-
-  <ui-view></ui-view>
-
-
-
-</section>
+  </button>

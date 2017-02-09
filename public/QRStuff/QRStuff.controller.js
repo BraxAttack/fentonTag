@@ -3,13 +3,16 @@ angular.module('fentonTagApp')
     var qrstuffCtrl = this;
 
     qrstuffCtrl.profile = profile;
+    qrstuffCtrl.currentPage = currentPage;
+    console.log(qrstuffCtrl.currentPage.lastPage);
+
 
     qrstuffCtrl.result = "";
 
     //initates qr reading
     load()
 
-    qrstuffCtrl.audio = new Audio('../sounds/coin-drop-4.mp3');
+    //qrstuffCtrl.audio = new Audio('../sounds/coin-drop-4.mp3');
     //qrstuffCtrl.audio.play();
 
     //initialize when page is loaded
@@ -24,7 +27,7 @@ angular.module('fentonTagApp')
 
     qrstuffCtrl.playCoinSound = function() {
       //var audio = new Audio('../sounds/coin-drop-4.mp3');
-      qrstuffCtrl.audio.play();
+      //qrstuffCtrl.audio.play();
        $state.go('homepage');
 
 
@@ -47,16 +50,21 @@ angular.module('fentonTagApp')
     qrstuffCtrl.checkInputVar = function () {
 
         var inputVal = angular.element('#resultInput').val();
-        
+
         if(inputVal != "null") {
           //lets user know it was taken
           //$window.alert("hello");
-          qrstuffCtrl.playCoinSound();
+          //qrstuffCtrl.playCoinSound();
           qrstuffCtrl.cancelInputVar();
           //stops the qr reader from firing the entire time
           setimg();
           $state.go('homepage');
-          console.log(inputVal);
+          //console.log(inputVal);
+          qrstuffCtrl.result = inputVal;
+          qrstuffCtrl.currentPage.lastPage = inputVal;
+          console.log("answer");
+          console.log(qrstuffCtrl.result);
+
         }
       }
 

@@ -14,31 +14,6 @@ var imghtml='<div></div>';
 
 var vidhtml = '<video id="v" autoplay></video>';
 
-function dragenter(e) {
-  e.stopPropagation();
-  e.preventDefault();
-}
-
-function dragover(e) {
-  e.stopPropagation();
-  e.preventDefault();
-}
-function drop(e) {
-  e.stopPropagation();
-  e.preventDefault();
-
-  var dt = e.dataTransfer;
-  var files = dt.files;
-  if(files.length>0)
-  {
-	handleFiles(files);
-  }
-  else
-  if(dt.getData('URL'))
-  {
-	qrcode.decode(dt.getData('URL'));
-  }
-}
 
 function handleFiles(f)
 {

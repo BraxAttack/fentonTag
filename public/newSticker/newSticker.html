@@ -1,7 +1,12 @@
-<md-button ui-sref="homepage">
+<button ui-sref="homepage">
   homepage
-</md-button>
+</button>
 <br />
+
+
+
+{{newstickerCtrl.currentPage.lastPage}}
+<input type="text" ng-model="newstickerCtrl.currentPage.lastPage" />
 
 new sticker
 <br />
@@ -17,8 +22,11 @@ new sticker
 -->
 
 <button ng-click="newstickerCtrl.initSticker()" >upload to firebase</button>
-things
+
 {{newstickerCtrl.lat}}
 <br />
 {{newstickerCtrl.stickers}}
 {{newstickerCtrl.stickerIDNumber.length}}
+
+<br />
+{{newstickerCtrl.watchID}}

@@ -12,9 +12,9 @@ angular
   .module('fentonTagApp', [
     'firebase',
     'angular-md5',
-    'ui.router',
+    'ui.router'/*,
     'ngMaterial',
-    'ngMessages'
+    'ngMessages'*/
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -25,6 +25,7 @@ angular
         resolve: {
           requireNoAuth: function($state, Auth){
             return Auth.$requireSignIn().then(function(auth){
+              stype=2;
               $state.go('homepage');
             }, function(error){
               return;
@@ -39,6 +40,7 @@ angular
         resolve: {
           requireNoAuth: function($state, Auth){
             return Auth.$requireSignIn().then(function(auth){
+              stype=2;
               $state.go('homepage');
             }, function(error){
               return;
@@ -53,12 +55,14 @@ angular
         resolve: {
           auth: function($state, Users, Auth){
             return Auth.$requireSignIn().catch(function(){
+              stype=2;
               $state.go('login');
             });
           },
           profile: function ($state, Auth, Users){
             return Auth.$requireSignIn().then(function(auth){
               return Users.getProfile(auth.uid).$loaded().then(function (profile){
+                stype=2;
                 if(profile.displayName){
                   return profile;
                 } else {
@@ -83,6 +87,7 @@ angular
             });
           },
           profile: function(Users, Auth){
+            stype=2;
             return Auth.$requireSignIn().then(function(auth){
               return Users.getProfile(auth.uid).$loaded();
             });
@@ -100,6 +105,7 @@ angular
             });
           },
           profile: function(Users, Auth){
+            stype=2;
             return Auth.$requireSignIn().then(function(auth){
               return Users.getProfile(auth.uid).$loaded();
             });
@@ -117,6 +123,7 @@ angular
             });
           },
           profile: function(Users, Auth){
+            stype=2;
             return Auth.$requireSignIn().then(function(auth){
               return Users.getProfile(auth.uid).$loaded();
             });
@@ -134,6 +141,7 @@ angular
             });
           },
           profile: function(Users, Auth){
+            stype=2;
             return Auth.$requireSignIn().then(function(auth){
               return Users.getProfile(auth.uid).$loaded();
             });

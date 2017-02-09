@@ -1,5 +1,5 @@
 angular.module('fentonTagApp')
-  .controller('HomepageCtrl', function($state, $mdDialog, Auth, Users, profile, currentPage){
+  .controller('HomepageCtrl', function($state, Auth, Users, profile, currentPage){
     var homepageCtrl = this;
 
 
@@ -21,6 +21,7 @@ angular.module('fentonTagApp')
 
 
     homepageCtrl.logout = function(){
+/*
         var confirm = $mdDialog.confirm()
               .title('Are you sure you want to Log Out?')
               .textContent('')
@@ -35,6 +36,12 @@ angular.module('fentonTagApp')
                  }, function() {
                     return
               });
+*/
+        Auth.$signOut().then(function(){
+          $state.go('login');
+        });
+
+
     };
 
   });
