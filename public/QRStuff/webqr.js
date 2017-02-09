@@ -185,7 +185,7 @@ function setwebcam2(options)
 	document.getElementById("result").innerHTML="- scanning -";
     if(stype==1)
     {
-        setTimeout(captureToCanvas, 500);
+        setTimeout(captureToCanvas, 1000);
         return;
     }
     var n=navigator;
