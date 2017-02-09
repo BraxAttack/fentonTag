@@ -11,27 +11,45 @@ angular.module('fentonTagApp')
 
 
 
+    newstickerCtrl.getNewStickerQR = function(){
+      newstickerCtrl.getLocation();
+      if(newstickerCtrl.currentPage.lat == 'null') {
+          $timeout(function () {
+            newstickerCtrl.getNewStickerQR();
+          }, 200);
+      }else{
+          console.log("got it");
+          newstickerCtrl.currentPage.lastPage = "sticker";
+          $state.go('QRreader');
+      }
 
+    }
 
     //MAPS API key
     //AIzaSyBemv7awP5b7YQcGhFgQb--v1BUo-Eacy0
 
 
     newstickerCtrl.getLocation = function() {
-      if (navigator && navigator.geolocation) {
-           navigator.geolocation.getCurrentPosition(newstickerCtrl.successCallback, newstickerCtrl.errorCallback);
-       } else {
-           console.log('Geolocation is not supported');
-       }
-    }
+        if (navigator && navigator.geolocation) {
+             navigator.geolocation.getCurrentPosition(newstickerCtrl.successCallback, newstickerCtrl.errorCallback);
+         } else {
+             console.log('Geolocation is not supported');
+         }
+     }
 
       newstickerCtrl.errorCallback = function() {}
       newstickerCtrl.successCallback = function(position) {
-           newstickerCtrl.lat = position.coords.latitude;
-           newstickerCtrl.lng = position.coords.longitude;
-           //alert(position.coords.latitude + "/" + position.coords.longitude);
-         }
+           //newstickerCtrl.lat = position.coords.latitude;
+           //newstickerCtrl.lng = position.coords.longitude;
+           newstickerCtrl.currentPage.lat = position.coords.latitude;
+           newstickerCtrl.currentPage.lng = position.coords.longitude;
 
+       }
+
+
+
+
+/*
 
 
 
@@ -61,9 +79,9 @@ angular.module('fentonTagApp')
 
 
 
-          alert("tag logged")
+          //alert("tag logged")
           $timeout(function () {
-              $window.location.reload();
+              //$window.location.reload();
           }, 10);
           alert("tag logged")
 
@@ -88,4 +106,6 @@ angular.module('fentonTagApp')
         $state.go('homepage');
       });
     };
+
+    */
   });

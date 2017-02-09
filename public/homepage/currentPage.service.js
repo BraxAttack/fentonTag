@@ -5,7 +5,9 @@ angular.module('fentonTagApp')
     currentPage.pageVar = 'blooba';
     currentPage.iconVar = 'blooba';
 
-    currentPage.lastPage = "naftali";
+    currentPage.lastPage = "null";
+    currentPage.lat = "null";
+    currentPage.lng = "null";
     //console.log(currentPage.pageVar);
 
     currentPage.add = function(pageName) {

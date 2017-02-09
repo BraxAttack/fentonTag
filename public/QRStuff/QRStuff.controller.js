@@ -4,7 +4,7 @@ angular.module('fentonTagApp')
 
     qrstuffCtrl.profile = profile;
     qrstuffCtrl.currentPage = currentPage;
-    console.log(qrstuffCtrl.currentPage.lastPage);
+    console.log(qrstuffCtrl.currentPage);
 
 
     qrstuffCtrl.result = "";
@@ -21,7 +21,6 @@ angular.module('fentonTagApp')
       setimg();
       setwebcam2();
 
-
     }
 
 
@@ -29,10 +28,6 @@ angular.module('fentonTagApp')
       //var audio = new Audio('../sounds/coin-drop-4.mp3');
       //qrstuffCtrl.audio.play();
        $state.go('homepage');
-
-
-
-
 
     }
 
@@ -58,12 +53,32 @@ angular.module('fentonTagApp')
           qrstuffCtrl.cancelInputVar();
           //stops the qr reader from firing the entire time
           setimg();
-          $state.go('homepage');
-          //console.log(inputVal);
-          qrstuffCtrl.result = inputVal;
-          qrstuffCtrl.currentPage.lastPage = inputVal;
-          console.log("answer");
-          console.log(qrstuffCtrl.result);
+
+          if(qrstuffCtrl.currentPage.lastPage == "sticker"){
+
+            //console.log(inputVal);
+            qrstuffCtrl.result = inputVal;
+            //qrstuffCtrl.currentPage.lastPage = inputVal;
+            console.log("answer");
+            console.log(qrstuffCtrl.result);
+            console.log(qrstuffCtrl.currentPage);
+
+
+            var updates = {};
+            qrstuffCtrl.stickerData = {
+              lat: qrstuffCtrl.currentPage.lat,
+              lng: qrstuffCtrl.currentPage.lng
+            };
+            updates['/Stickers/' + qrstuffCtrl.result ] = qrstuffCtrl.stickerData;
+            firebase.database().ref().update(updates);
+
+            alert("ticket Logged");
+            $state.go('homepage');
+          }else{
+            alert("error has occured, try again");
+            $state.go('homepage');
+          }
+
 
         }
       }
