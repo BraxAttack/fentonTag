@@ -8,7 +8,6 @@ New Session
 
 
 
-<form ng-submit="projectsCtrl.createProject()">
 
 <input-container style="margin-right: 10px;">
   <label>Game Type</label></label>
@@ -24,15 +23,22 @@ New Session
 <button class="raised primary" ng-click="newsessionCtrl.gameDurr = 60">60 min</button>
 {{newsessionCtrl.gameDurr}}
 <br />
-
+<!--
 <button class="raised primary" ng-click="newsessionCtrl.getLocation()">get coords</button>
 <br />
+-->
+play Radius (from this location)
+<input type="number" id="myNumber" ng-model="newsessionCtrl.playRadius" min=".1" step=".1">
+<br />
 
-<h3>My Google Maps Demo</h3>
+<button type="submit" ng-click="newsessionCtrl.getLocation()">Search for Stickers</button>
 <div id="map" style="height: 500px; width: 500px;"></div>
 
 
-<button  type="submit" class="raised">
+<button  type="submit" ng-click="newsessionCtrl.createProject()">
   Create Project
 </button>
-</form>
+
+<!--
+{{newsessionCtrl.stickers}}
+-->

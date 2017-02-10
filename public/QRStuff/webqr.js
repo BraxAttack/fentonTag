@@ -176,14 +176,17 @@ function setwebcam2(options)
 
     if(n.getUserMedia)
 	{
-		webkit=true;
-        n.getUserMedia({video: options, audio: false}, success, error);
+				webkit=true;
+		    n.getUserMedia({video: options, audio: false}, success, error);
+
+
+
 	}
     else
     if(n.webkitGetUserMedia)
     {
         webkit=true;
-        n.webkitGetUserMedia({video:options, audio: false}, success, error);
+        n.webkitGetUserMedia({video: options, audio: false}, success, error);
     }
     else
     if(n.mozGetUserMedia)

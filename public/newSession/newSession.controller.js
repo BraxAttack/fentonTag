@@ -17,6 +17,8 @@ angular.module('fentonTagApp')
 
     newsessionCtrl.gameDurr = 15;
 
+    newsessionCtrl.playRadius = .5;
+
 
     //MAPS API key
     //AIzaSyBemv7awP5b7YQcGhFgQb--v1BUo-Eacy0
@@ -24,9 +26,20 @@ angular.module('fentonTagApp')
     newsessionCtrl.initMap = function(latVar, lngVar) {
       var uluru = {lat: latVar, lng: lngVar};
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
+        zoom: 15,
         center: uluru
-      });
+      }),
+
+      circle  = new google.maps.Circle({
+                  map:map,
+                  center:map.getCenter(),
+                  radius:newsessionCtrl.playRadius*1000,
+                  strokeColor: '#4CAF50',
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: '#4CAF50',
+                  fillOpacity: 0.35
+                });
 
       var centerIcon = {
           url: '../images/mylocation.png',
@@ -41,15 +54,21 @@ angular.module('fentonTagApp')
         icon: centerIcon
       });
 
+      newsessionCtrl.sessionStickers = [];
+      //console.log(newsessionCtrl.stickers.length);
 
       for (i = 0; i < newsessionCtrl.stickers.length; i++) {
-          //console.log(newsessionCtrl.stickers[i]['lat']);
-          var uluru = {lat: newsessionCtrl.stickers[i]['lat'], lng: newsessionCtrl.stickers[i]['lng']};
-          marker = new google.maps.Marker({
-                   position: uluru,
-                   map: map
+          //console.log(newsessionCtrl.stickers[i]['$id']);
+          //console.log(newsessionCtrl.calcCrow(latVar,lngVar,newsessionCtrl.stickers[i]['lat'],newsessionCtrl.stickers[i]['lng']).toFixed(1));
+          if((newsessionCtrl.calcCrow(latVar,lngVar,newsessionCtrl.stickers[i]['lat'],newsessionCtrl.stickers[i]['lng']).toFixed(1)) < newsessionCtrl.playRadius) {
+            newsessionCtrl.sessionStickers.push(newsessionCtrl.stickers[i]['$id']);
+            var uluru = {lat: newsessionCtrl.stickers[i]['lat'], lng: newsessionCtrl.stickers[i]['lng']};
+            marker = new google.maps.Marker({
+                     position: uluru,
+                     map: map
 
-        })
+          })
+        }
       };
 /*      marker = new google.maps.Marker({
          position: uluru,
@@ -57,6 +76,11 @@ angular.module('fentonTagApp')
          icon: centerIcon
        });
   */
+
+
+
+
+
 
 
     }
@@ -70,7 +94,7 @@ angular.module('fentonTagApp')
     }
 
       newsessionCtrl.showLatLng = function(position) {
-      console.log(" " + position.coords.latitude + " / " + position.coords.longitude);
+      //console.log(" " + position.coords.latitude + " / " + position.coords.longitude);
       newsessionCtrl.lat = position.coords.latitude;
       newsessionCtrl.lng = position.coords.longitude;
       //initializes the google map
@@ -93,6 +117,74 @@ angular.module('fentonTagApp')
                   break;
           }
       }
+
+
+      newsessionCtrl.createProject = function() {
+        //alert("start");
+
+          var sessionKey = firebase.database().ref('Sessions/').push().key;
+          var sessionUpdates = {};
+
+          newsessionCtrl.sessionOptions = {
+            gameType: newsessionCtrl.gameType,
+            gameLength: newsessionCtrl.gameDurr,
+            radius: 1,
+            originlat: newsessionCtrl.lat,
+            originlng: newsessionCtrl.lng,
+            seshStickers: newsessionCtrl.sessionStickers,
+            host: newsessionCtrl.profile["$id"]
+
+          };
+          console.log(newsessionCtrl.sessionOptions);
+
+          sessionUpdates['/Sessions/' + sessionKey] = newsessionCtrl.sessionOptions;
+          firebase.database().ref().update(sessionUpdates)
+          .then(function(ref){
+            console.log(ref);
+            $state.go('homepage');
+
+          })
+
+      };
+
+
+
+      //calc distance
+      //This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
+
+      newsessionCtrl.calcCrow = function(lat1, lon1, lat2, lon2)
+      {
+        var R = 6371; // km
+        var dLat = newsessionCtrl.toRad(lat2-lat1);
+        var dLon = newsessionCtrl.toRad(lon2-lon1);
+        var lat1 = newsessionCtrl.toRad(lat1);
+        var lat2 = newsessionCtrl.toRad(lat2);
+
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c;
+        return d;
+      }
+
+      // Converts numeric degrees to radians
+      newsessionCtrl.toRad = function(Value)
+      {
+          return Value * Math.PI / 180;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       //calls location getting function
       newsessionCtrl.getLocation();

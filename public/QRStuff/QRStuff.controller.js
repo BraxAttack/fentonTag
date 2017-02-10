@@ -85,8 +85,11 @@ angular.module('fentonTagApp')
             };
             updates['/Stickers/' + qrstuffCtrl.result ] = qrstuffCtrl.stickerData;
 
-            firebase.database().ref().update(updates);
-
+            firebase.database().ref().update(updates)
+            .then(function(ref) {
+              console.log(ref)
+            });
+            alert(qrstuffCtrl.result);
             console.log("put in a thing to verify success");
             $state.go('homepage');
 

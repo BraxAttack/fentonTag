@@ -1,0 +1,27 @@
+{{indivsessionCtrl.sessionID}}
+<br />
+interface and stuff...
+<br />
+
+game length:
+{{indivsessionCtrl.sessionData[0]["$value"] }}
+<br />
+
+game type:
+{{indivsessionCtrl.sessionData[1]["$value"] }}
+<br />
+
+radius:
+{{indivsessionCtrl.sessionData[5]["$value"] }}
+<br />
+
+Sticker IDs:
+<div ng-repeat="sticker in indivsessionCtrl.sessionData[6]">
+  ---------------{{sticker}}
+</div>
+
+<br />
+
+<div ng-if="indivsessionCtrl.isHost">
+  is host
+</div>
