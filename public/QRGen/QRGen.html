@@ -1,47 +1,6 @@
-<h1>Angular QR Code</h1>
 
-<pre>&lt;qrcode&gt;&lt;/qrcode&gt;</pre>
+<qrcode version="{{qrgenCtrl.QRinfo.version}}" error-correction-level="{{qrgenCtrl.QRinfo.errorL}}" size="{{qrgenCtrl.QRinfo.size}}" data="{{qrgenCtrl.QRinfo.data}}"></qrcode>
 
-<qrcode version="{{v}}" error-correction-level="{{e}}" size="{{s}}" data="{{foo}}"></qrcode>
-
-<form>
-  <p>
-    <label for="data">Data</label>
-    <textarea id="data" data-ng-model="foo" maxlength="2953"></textarea>
-  </p>
-  <p>
-    <label for="size">Size</label>
-    <input id="size" type="number" data-ng-model="s">
-  </p>
-  <p>
-    <label for="version">Version</label>
-    <input id="version" type="number" data-ng-model="v" min="1" max="40">
-  </p>
-  <p>
-    <label for="level" title="Error Correction Level">Level</label>
-    <select id="level" data-ng-model="e" data-ng-options="option.version as option.name for option in [{name:'Low', version:'L'},{name:'Medium', version:'M'},{name:'Quartile', version:'Q'},{name:'High', version:'H'}]"></select>
-  </p>
-</form>
-
-<h2>Downloadable</h2>
-
-<qrcode version="{{v}}" error-correction-level="{{e}}" size="{{s}}" data="{{foo}}" download></qrcode>
-
-<h2>Linked</h2>
-
-<qrcode version="{{v}}" error-correction-level="H" size="274" data="{{bar}}" href="{{bar}}"></qrcode>
-
-<form>
-  <p>
-    <label for="data">Data</label>
-    <textarea id="data" data-ng-model="bar" maxlength="2953"></textarea>
-  </p>
-</form>
-
-<div class="footer">
-
-  <small>
-    <a href="http://monospaced.github.io/">Monospaced Labs</a>
-  </small>
-
-</div>
+<!--
+{{qrgenCtrl.currentPage}}
+-->

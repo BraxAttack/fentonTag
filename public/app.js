@@ -130,6 +130,24 @@ angular
             }
           }
         })
+      .state('sessions.sessionindiv.qrcode', {
+          url: '/qr',
+          templateUrl: 'QRGen/QRGen.html',
+          controller: 'QRGenCtrl as qrgenCtrl',
+          resolve: {
+            auth: function($state, Users, Auth){
+              return Auth.$requireSignIn().catch(function(){
+                $state.go('login');
+              });
+            },
+            profile: function(Users, Auth){
+              stype=2;
+              return Auth.$requireSignIn().then(function(auth){
+                return Users.getProfile(auth.uid).$loaded();
+              });
+            }
+          }
+        })
       .state('newsticker', {
         url: '/newsticker',
         templateUrl: 'newSticker/newSticker.html',

@@ -23,5 +23,10 @@ Sticker IDs:
 <br />
 
 <div ng-if="indivsessionCtrl.isHost">
-  is host
+
+  <button ng-click="indivsessionCtrl.ShowQRCode()">
+    Show invite Code
+  </button>
+  <ui-view></ui-view>
+
 </div>
